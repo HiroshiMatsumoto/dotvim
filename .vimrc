@@ -1,3 +1,9 @@
+set fenc=utf-8
+set encoding=utf-8
+scriptencoding utf-8
+set fileformat=unix
+set ambiwidth=double
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -28,8 +34,6 @@ map / <Plug>(easymotion-sn)
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
-
-
 set timeout timeoutlen=1000 ttimeoutlen=50
 
 " move among buffers with CTRL 
@@ -37,8 +41,13 @@ set timeout timeoutlen=1000 ttimeoutlen=50
 " map <C-K> :bprev<CR>
 
 " space-ls shows list and is in :buffer command commence 
-noremap <Leader>ls :<C-u>ls<CR>:buffer<Space>
-
+" noremap <Leader>ls :<C-u>ls<CR>:buffer<Space>
+set wildmenu
+set wildmode=full
+set completeopt=menuone
+set ttyfast
+set showmatch
+set cursorline
 set autoindent
 set smartindent
 set expandtab
@@ -47,6 +56,12 @@ set shiftwidth=2
 set autochdir
 " no wrap for lines longer than window width; similar to toggle-truncate-lines
 set nowrap
+
+inoremap <c-d> <delete>
+inoremap <c-j> <down>
+inoremap <c-k> <up>
+inoremap <c-h> <left>
+inoremap <c-l> <right>
 
 " let g:markdown_folding = 1
 " https://github.com/neovim/nvim-lspconfig/issues/195
@@ -58,11 +73,8 @@ let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 1 
 let g:asyncomplete_popup_delay = 200
 
-
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
-
-
 
 call plug#begin()
 " The default plugin directory will be as follows:
@@ -108,21 +120,18 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-
-
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-
 Plug 'easymotion/vim-easymotion'
 
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+Plug 'tpope/vim-fugitive'
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
