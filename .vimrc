@@ -63,6 +63,8 @@ inoremap <c-k> <up>
 inoremap <c-h> <left>
 inoremap <c-l> <right>
 
+let g:coc_disable_startup_warning = 1
+
 " let g:markdown_folding = 1
 " https://github.com/neovim/nvim-lspconfig/issues/195
 set signcolumn=yes
@@ -75,6 +77,31 @@ let g:asyncomplete_popup_delay = 200
 
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
+
+
+" ccls C++ Language Server setup
+if executable('ccls')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'ccls',
+      \ 'cmd': {server_info->['ccls']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': {'cache': {'directory': expand('~/.cache/ccls') }},
+      \ 'allowlist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+endif
+
+" Key bindings for vim-lsp for ccls
+nn <silent> <M-d> :LspDefinition<cr>
+nn <silent> <M-r> :LspReferences<cr>
+" autocmd Filetype c,cc,cpp,cxx,h,hpp nn <c-r> :LspRename<cr>
+nn <silent> <M-a> :LspWorkspaceSymbol<cr>
+nn <silent> <M-l> :LspDocumentSymbol<cr>
+
+
+
+let g:lsp_cxx_hl_log_file = '/tmp/vim-lsp-cxx-hl.log'
+let g:lsp_cxx_hl_verbose_log = 1
+<
 
 call plug#begin()
 " The default plugin directory will be as follows:
@@ -117,8 +144,16 @@ Plug '~/my-prototype-plugin'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" 
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
@@ -132,6 +167,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'tpope/vim-fugitive'
+
+
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
