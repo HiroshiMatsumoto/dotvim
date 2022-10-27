@@ -36,6 +36,9 @@ map N <Plug>(easymotion-prev)
 
 set timeout timeoutlen=1000 ttimeoutlen=50
 
+" relative line-number
+set rnu
+
 " move among buffers with CTRL 
 " map <C-J> :bnext<CR>
 " map <C-K> :bprev<CR>
@@ -164,11 +167,10 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'easymotion/vim-easymotion'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'tpope/vim-fugitive'
 
-
+Plug 'roman/golden-ratio'
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
