@@ -39,11 +39,11 @@ set timeout timeoutlen=1000 ttimeoutlen=50
 " relative line-number
 set rnu
 
-" move among buffers with CTRL 
+" move among buffers with CTRL
 " map <C-J> :bnext<CR>
 " map <C-K> :bprev<CR>
 
-" space-ls shows list and is in :buffer command commence 
+" space-ls shows list and is in :buffer command commence
 " noremap <Leader>ls :<C-u>ls<CR>:buffer<Space>
 set wildmenu
 set wildmode=full
@@ -75,7 +75,7 @@ let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 1
 let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 1 
+let g:asyncomplete_auto_completeopt = 1
 let g:asyncomplete_popup_delay = 200
 
 let g:prettier#autoformat = 1
@@ -92,6 +92,11 @@ if executable('ccls')
       \ 'allowlist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
       \ })
 endif
+autocmd FileType cpp nnoremap <buffer> <C-]> :LspNextError<CR>
+
+
+" remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//ge
 
 " Key bindings for vim-lsp for ccls
 nn <silent> <M-d> :LspDefinition<cr>
@@ -149,7 +154,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" 
+"
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 
