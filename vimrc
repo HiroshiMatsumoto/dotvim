@@ -47,7 +47,6 @@ set rnu
 " noremap <Leader>ls :<C-u>ls<CR>:buffer<Space>
 set wildmenu
 set wildmode=full
-set completeopt=menuone
 set ttyfast
 set showmatch
 set cursorline
@@ -74,9 +73,23 @@ set signcolumn=yes
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 1
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+" 補完表示時のEnterで改行をしない
+inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
+inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
+
+" allow modifying the completeopt variable, or it will
+" be overridden all the time
+let g:asyncomplete_auto_completeopt = 0
 let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 1
-let g:asyncomplete_popup_delay = 200
+let g:asyncomplete_popup_delay = 20
+" set completeopt=menuone,noinsert,noselect,preview
+set completeopt=menuone,noinsert,preview
+
 
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
