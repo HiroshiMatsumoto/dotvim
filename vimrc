@@ -122,7 +122,52 @@ nn <silent> <M-l> :LspDocumentSymbol<cr>
 
 let g:lsp_cxx_hl_log_file = '/tmp/vim-lsp-cxx-hl.log'
 let g:lsp_cxx_hl_verbose_log = 1
-<
+
+" tab control
+nmap tc :tabnew<CR>
+nmap tn :tabnext<CR>
+nmap tp :tabprevious<CR>
+
+
+" https://qiita.com/kamykn/items/16f6129c4732a053ace1
+" [tab open] ----------------------------------
+" 数あるタブから開く
+
+" leader to で開始するための設定
+nnoremap <leader>to :FZFTabOpen<CR>
+command! FZFTabOpen call s:FZFTabOpenFunc()
+
+function! s:FZFTabOpenFunc()
+    call fzf#run({
+            \ 'source':  s:GetTabList(),
+            \ 'sink':    function('s:TabListSink'),
+            \ 'options': '-m -x +s',
+            \ 'down':    '40%'})
+endfunction
+
+function! s:GetTabList()
+    let s:tabList = execute('tabs')
+    let s:textList = []
+    for tabText  in split(s:tabList, '\n')
+        let s:tabPageText = matchstr(tabText, '^Tab page')
+        if !empty(s:tabPageText)
+            let s:pageNum = matchstr(tabText, '[0-9]*$')
+        else
+            let s:textList = add(s:textList, printf('%d %s',
+                \ s:pageNum,
+                \ tabText,
+                \   ))
+        endif
+    endfor
+    return s:textList
+endfunction
+
+function! s:TabListSink(line)
+  let parts = split(a:line, '\s')
+  execute 'normal ' . parts[0] . 'gt'
+endfunction
+
+
 
 call plug#begin()
 " The default plugin directory will be as follows:
