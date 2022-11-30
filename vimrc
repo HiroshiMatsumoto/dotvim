@@ -124,9 +124,12 @@ let g:lsp_cxx_hl_log_file = '/tmp/vim-lsp-cxx-hl.log'
 let g:lsp_cxx_hl_verbose_log = 1
 
 " tab control
-nmap tc :tabnew<CR>
-nmap tn :tabnext<CR>
-nmap tp :tabprevious<CR>
+set showtabline=2
+nmap t [Tab]
+nmap [Tab]c :tabnew<CR>
+nmap [Tab]x :tabclose<CR>
+nmap [Tab]n :tabnext<CR>
+nmap [Tab]p :tabprevious<CR>
 
 
 " https://qiita.com/kamykn/items/16f6129c4732a053ace1
@@ -168,6 +171,15 @@ function! s:TabListSink(line)
 endfunction
 
 
+" increment/decrement number in normal-mode
+noremap + <Nop>
+noremap - <Nop>
+noremap + <C-a>
+noremap - <C-x>
+
+" pasting texts indentation-aligned
+nnoremap p ]p
+nnoremap P ]P
 
 call plug#begin()
 " The default plugin directory will be as follows:
@@ -204,6 +216,7 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
@@ -243,5 +256,4 @@ call plug#end()
 "   syntax off            " Disable syntax highlighting
 "
 " let g:python3_host_prog = system('type pyenv &>/dev/null && echo -n "$(pyenv root)/versions/$(cat $(pyenv root)/version | head -n 1)/bin/python" || echo -n $(which python)')
-
 
