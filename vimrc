@@ -29,7 +29,6 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-goimports'
 " running test
 Plug 'vim-test/vim-test'
-
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -41,8 +40,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " vimagit
 Plug 'jreybert/vimagit'
-" vim-gutter for show diff/changes
+" to show changed lines from previous commit
 Plug 'airblade/vim-gitgutter'
+Plug 'roman/golden-ratio'
 call plug#end()
 
 " LSP configuration copy from mattn
@@ -97,7 +97,6 @@ let g:goimports = 1
 let test#strategy = "dispatch"
 let test#go#runner = 'gotest'
 
-
 " vim-test keybinds
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
@@ -113,7 +112,8 @@ let g:lsp_diagnostics_echo_cursor = 1
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
-
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_powerline_fonts = 1
 " vim-gutter
 " stage the hunk with <Leader>hs or undo it with <Leader>hu.
 
@@ -121,3 +121,4 @@ let g:airline#extensions#tabline#enabled = 1
 " :Git commit: commits what's being staged
 " :x to close commit message window
 " :Git push to push commits
+
