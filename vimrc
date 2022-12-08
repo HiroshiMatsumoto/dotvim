@@ -113,3 +113,11 @@ let g:lsp_diagnostics_echo_cursor = 1
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
+
+" vim-gutter
+" stage the hunk with <Leader>hs or undo it with <Leader>hu.
+
+" vim-fugitive
+" :Git commit: commits what's being staged
+" :x to close commit message window
+" :Git push to push commits
