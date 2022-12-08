@@ -46,7 +46,7 @@ call plug#end()
 
 " color scheme
 colorscheme everforest
-set background = dark
+set background=dark
 let g:everforest_background = 'soft'
 let g:everforest_better_performance = 1
 " LSP configuration copy from mattn
