@@ -39,9 +39,10 @@ Plug 'tpope/vim-fugitive'
 " vim-airline: status line 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
 " vimagit
 Plug 'jreybert/vimagit'
+" vim-gutter for show diff/changes
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " LSP configuration copy from mattn
