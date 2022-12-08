@@ -16,6 +16,8 @@ set rnu
 set nowrap
 " 開いているファイルのディレクトリに自動移動
 set autochdir
+" 検索結果のハイライト
+set hlsearch
 " Plug
 call plug#begin()
 Plug 'prabirshrestha/vim-lsp'
