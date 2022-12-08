@@ -1,5 +1,4 @@
 set encoding=utf-8
-colorscheme despacio
 
 let mapleader="\<Space>"
 nmap r :source ~/.vim/vimrc<CR>
@@ -34,7 +33,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " git on vim
 Plug 'tpope/vim-fugitive'
-
 " vim-airline: status line 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -43,8 +41,14 @@ Plug 'jreybert/vimagit'
 " to show changed lines from previous commit
 Plug 'airblade/vim-gitgutter'
 Plug 'roman/golden-ratio'
+Plug 'sainnhe/everforest'
 call plug#end()
 
+" color scheme
+colorscheme everforest
+set background = dark
+let g:everforest_background = 'soft'
+let g:everforest_better_performance = 1
 " LSP configuration copy from mattn
 " https://mattn.kaoriya.net/software/vim/20191231213507.htm
 if empty(globpath(&rtp, 'autoload/lsp.vim'))
