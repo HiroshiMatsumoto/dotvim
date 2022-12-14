@@ -84,6 +84,13 @@ augroup lsp_install
 augroup END
 command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
 
+augroup lsp_auto_formatting
+    autocmd!
+    autocmd BufWritePre *.py LspDocumentFormatSync
+augroup END
+
+" column display glitch fix
+set signcolumn=yes
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:asyncomplete_auto_popup = 1
@@ -120,6 +127,8 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_powerline_fonts = 1
 " vim-gutter
 " stage the hunk with <Leader>hs or undo it with <Leader>hu.
+nmap <buffer> <Leader>gu :GitGutterAll<CR>
+
 
 " vim-fugitive
 " :Git commit: commits what's being staged
