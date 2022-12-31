@@ -9,8 +9,9 @@ set expandtab
 " default is tab is 8 spaces 
 set tabstop=4
 set shiftwidth=4
-" 相対行番号
-set rnu
+" 絶対行番号&相対行番号
+set number relativenumber
+set nu rnu
 " 折り返しなし 
 set nowrap
 " 開いているファイルのディレクトリに自動移動
